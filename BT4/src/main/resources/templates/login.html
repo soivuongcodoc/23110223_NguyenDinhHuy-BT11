@@ -1,0 +1,61 @@
+<!-- login.html (from context, basic form) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/mainjs.js"></script>
+</head>
+<body>
+	<h1>Login</h1>
+	<input type="text" id="username" placeholder="Username">
+	<input type="password" id="password" placeholder="Password">
+	<button onclick="login()">Login</button>
+
+	<script type="text/javascript">
+		// mainjs.js
+		function login() {
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			var data = {
+				username : username,
+				password : password
+			};
+			$.ajax({
+				url : "/auth/login",
+				type : "POST",
+				contentType : "application/json; charset=utf-8",
+				data : JSON.stringify(data),
+				success : function(data) {
+					localStorage.token = data.token;
+					window.location.href = "/profile";
+				},
+				error : function() {
+					alert("Login Failed");
+				}
+			});
+		}
+
+		function getProfile() {
+			$
+					.ajax({
+						url : "/users/me",
+						type : "GET",
+						headers : {
+							"Authorization" : "Bearer " + localStorage.token
+						},
+						success : function(data) {
+							document.getElementById("user-info").innerHTML = "<p>Username: "
+									+ data.username
+									+ "</p><p>Role: "
+									+ data.role + "</p>";
+						},
+						error : function() {
+							alert("Failed");
+						}
+					});
+		}
+	</script>
+</body>
+</html>
