@@ -15,8 +15,8 @@ import java.util.List;
 public class CustomerController {
 
     final private List<Customer> customers = List.of(
-            Customer.builder().id("001").name("Nguyễn Hữu Trí").email("tri1@gmail.com").build(),
-            Customer.builder().id("002").name("Trí Hữu Nguyễn").email("tri2@gmail.com").build()
+            Customer.builder().id("001").name("Nguyễn Đình Huy").email("nguyendinhhuylop91@gmail.com").build(),
+            Customer.builder().id("002").name("Huy Đình Nguyễn").email("nguyendinhhhuylop91@gmail.com").build()
     );
 
     @GetMapping("/hello")
